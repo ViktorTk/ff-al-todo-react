@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AddTaskForm from './AddTaskForm'
 import SearchTaskForm from './SearchTaskForm'
 import TodoInfo from './TodoInfo'
@@ -49,6 +49,22 @@ const Todo = () => {
       setNewTaskTitle('')
     }
   }
+
+  useEffect(() => {
+    console.log('Компонент ToDo смонтирован, идет загрузка tasks...')
+    const savedTasks = localStorage.getItem('tasks')
+
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks))
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('Сохраняем данные в локальное хранилище:')
+    console.table(tasks)
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   return (
     <div className="todo">
