@@ -1,18 +1,21 @@
-import { memo } from 'react'
+import { memo, useContext } from 'react'
+import { TasksContext } from '../context/TasksContext'
 
 const TodoItem = (props) => {
+  const { className = '', id, title, isDone } = props
+
   const {
-    className = '',
-    id,
-    title,
-    isDone,
-    ref,
-    onDeleteTaskButtonClick,
-    onTaskCompleteChange,
-  } = props
+    firstIncompleteTaskRef,
+    firstIncompleteTaskId,
+    deleteTask,
+    toggleTaskComplete,
+  } = useContext(TasksContext)
 
   return (
-    <li className={`todo__item ${className}`} ref={ref}>
+    <li
+      className={`todo__item ${className}`}
+      ref={id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
+    >
       <input
         className="todo-item__checkbox"
         id={id}

@@ -4,6 +4,7 @@ import SearchTaskForm from './SearchTaskForm'
 import TodoInfo from './TodoInfo'
 import Button from './Button'
 import TodoList from './TodoList'
+import { TasksContext } from '../context/TasksContext'
 
 const Todo = () => {
   const [tasks, setTasks] = useState(() => {
@@ -87,44 +88,44 @@ const Todo = () => {
       : null
   }, [searchQuery, tasks])
 
-  const doneTasks = useMemo(() => {
-    return tasks.filter(({ isDone }) => isDone).length
-  }, [tasks])
-
   return (
-    <div className="todo">
-      <h1 className="todo__title">To Do List</h1>
-      <AddTaskForm
-        addTask={addTask}
-        newTaskTitle={newTaskTitle}
-        setNewTaskTitle={setNewTaskTitle}
-        newTaskInputRef={newTaskInputRef}
-      />
-      <SearchTaskForm
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-      <TodoInfo
-        total={tasks.length}
-        done={doneTasks}
-        onDeleteAllButtonClick={deleteAllTasks}
-      />
-      <Button
-        onClick={() =>
-          firstIncompleteTaskRef.current?.scrollIntoView({ behavior: 'smooth' })
-        }
-      >
-        Shor first incomplete task
-      </Button>
-      <TodoList
-        tasks={tasks}
-        filteredTasks={filteredTasks}
-        firstIncompleteTaskRef={firstIncompleteTaskRef}
-        firstIncompleteTaskId={firstIncompleteTaskId}
-        onDeleteTaskButtonClick={deleteTask}
-        onTaskCompleteChange={toggleTaskComplete}
-      />
-    </div>
+    <TasksContext.Provider
+      value={{
+        tasks,
+        filteredTasks,
+        firstIncompleteTaskRef,
+        firstIncompleteTaskId,
+        deleteTask,
+        deleteAllTasks,
+        toggleTaskComplete,
+      }}
+    >
+      {' '}
+      <div className="todo">
+        <h1 className="todo__title">To Do List</h1>
+        <AddTaskForm
+          addTask={addTask}
+          newTaskTitle={newTaskTitle}
+          setNewTaskTitle={setNewTaskTitle}
+          newTaskInputRef={newTaskInputRef}
+        />
+        <SearchTaskForm
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <TodoInfo />
+        <Button
+          onClick={() =>
+            firstIncompleteTaskRef.current?.scrollIntoView({
+              behavior: 'smooth',
+            })
+          }
+        >
+          Show first incomplete task
+        </Button>
+        <TodoList />
+      </div>
+    </TasksContext.Provider>
   )
 }
 
