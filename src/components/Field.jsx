@@ -25,7 +25,11 @@ const Field = (props) => {
         onInput={onInput}
         ref={ref}
       />
-      {error && <span className="field__error">{error}</span>}
+      {error && (
+        <span className="field__error" title={error}>
+          {error}
+        </span>
+      )}
     </div>
   )
 }
