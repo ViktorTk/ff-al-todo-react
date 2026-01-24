@@ -11,13 +11,23 @@ const useTasks = () => {
     const isConfirmed = confirm('Are you sure you want to delete all?')
 
     if (isConfirmed) {
-      setTasks([])
+      Promise.all(
+        tasks.map(({ id }) => {
+          return fetch(`http://localhost:3001/tasks/${id}`, {
+            method: 'DELETE',
+          }).then(() => setTasks([]))
+        }),
+      )
     }
-  }, [])
+  }, [tasks])
 
   const deleteTask = useCallback(
     (taskId) => {
-      setTasks(tasks.filter((task) => task.id !== taskId))
+      fetch(`http://localhost:3001/tasks/${taskId}`, {
+        method: 'DELETE',
+      }).then(() => {
+        setTasks(tasks.filter((task) => task.id !== taskId))
+      })
     },
     [tasks],
   )
@@ -38,16 +48,27 @@ const useTasks = () => {
 
   const addTask = useCallback((title) => {
     const newTask = {
-      id: crypto?.randomUUID() ?? Date.now().toString(),
+      // id: crypto?.randomUUID() ?? Date.now().toString(), // генерация id - теперь на стороне сервера
       title,
       isDone: false,
     }
-    // setTasks([...tasks, newTask])
-    setTasks((prevTasks) => [...prevTasks, newTask])
-    setNewTaskTitle('')
-    setSearchQuery('')
 
-    newTaskInputRef.current.focus()
+    fetch(`http://localhost:3001/tasks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask),
+    })
+      .then((response) => response.json())
+      .then((addedTask) => {
+        // setTasks([...tasks, newTask]) // или для использования прошлого значения есть вариант через коллбек
+        setTasks((prevTasks) => [...prevTasks, addedTask])
+        setNewTaskTitle('')
+        setSearchQuery('')
+
+        newTaskInputRef.current.focus()
+      })
   }, [])
 
   useEffect(() => {
