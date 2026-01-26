@@ -1,6 +1,3 @@
-import { TasksProvider } from './context/TasksContext'
-import Todo from './components/Todo'
-
 import Router from './Router'
 import TasksPage from './pages/TasksPage'
 import TaskPage from './pages/TaskPage'
