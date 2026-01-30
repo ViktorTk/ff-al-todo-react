@@ -13,7 +13,7 @@ const Field = (props) => {
   } = props
 
   return (
-    <div className={`${styles['field']} ${styles[className]}`}>
+    <div className={`${styles['field']} ${className}`}>
       <label className={styles['label']} htmlFor={id}>
         {label}
       </label>

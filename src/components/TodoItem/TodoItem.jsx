@@ -15,27 +15,24 @@ const TodoItem = (props) => {
 
   return (
     <li
-      className={`${styles['todo__item']} ${styles[className]}`}
+      className={`${styles['todoItem']} ${styles[className]}`}
       ref={id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
     >
       <input
-        className={styles['todo-item__checkbox']}
+        className={styles['checkbox']}
         id={id}
         type="checkbox"
         checked={isDone}
         onChange={({ target }) => toggleTaskComplete(id, target.checked)}
       />
-      <label
-        className={`${styles['todo-item__label']} ${styles['visually-hidden']}`}
-        htmlFor={id}
-      >
+      <label className={`${styles['label']} visually-hidden`} htmlFor={id}>
         {title}
       </label>
       <RouterLink to={`/tasks/${id}`} aria-label="Task detail page">
         {title}
       </RouterLink>
       <button
-        className={styles['todo-item__delete-button']}
+        className={styles['deleteButton']}
         aria-label="Delete"
         title="Delete"
         onClick={() => deleteTask(id)}
