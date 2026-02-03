@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { TasksContext } from '../../context/TasksContext'
-import Field from '../Field/Field'
+import { TasksContext } from '../../entities/todo'
+import Field from '../../components/Field/Field'
 
 const SearchTaskForm = (props) => {
   const { styles } = props
