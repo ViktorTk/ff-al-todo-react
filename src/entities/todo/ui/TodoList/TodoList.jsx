@@ -1,6 +1,5 @@
 import { memo, useContext } from 'react'
-import TodoItem from '../TodoItem/TodoItem'
-import { TasksContext } from '../../model/TasksContext'
+import { TodoItem, TasksContext } from '@/entities/todo'
 
 const TodoList = (props) => {
   const { styles } = props
