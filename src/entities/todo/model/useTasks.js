@@ -56,7 +56,7 @@ const useTasks = () => {
     taskAPI.delete(taskId).then(() => {
       setDisappearingTaskId(taskId)
       setTimeout(() => {
-        // setTasks(tasks.filter((task) => task.id !== taskId)) // логика под работу с reducer
+        // setTasks(tasks.filter((task) => task.id !== taskId)) // перенес на логику работы с reducer
         dispatch({ type: 'DELETE', id: taskId })
         setDisappearingTaskId(null)
       }, 400)
