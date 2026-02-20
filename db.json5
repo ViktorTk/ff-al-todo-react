@@ -1,1 +1,12 @@
-{tasks:[{id:'task-1',title:'Купить молоко',isDone:false},{id:'task-2',title:'Погладить кота',isDone:true},{id:'task-3',title:'Погладить собаку',isDone:false},{id:'e52b',title:'test',isDone:true},{id:'fd70',title:'Первая',isDone:false},{id:'3679',title:'Вторая',isDone:false},{id:'eb35',title:'Третья',isDone:true},{id:'53ea',title:'Четвертая',isDone:false}]}
+{
+  tasks: [
+    { id: 'task-1', title: 'Купить молоко', isDone: false },
+    { id: 'task-2', title: 'Погладить кота', isDone: true },
+    { id: 'task-3', title: 'Погладить собаку', isDone: false },
+    { id: 'e52b', title: 'test', isDone: true },
+    { id: 'fd70', title: 'Первая', isDone: false },
+    { id: '3679', title: 'Вторая', isDone: false },
+    { id: 'eb35', title: 'Третья', isDone: true },
+    { id: '53ea', title: 'Четвертая', isDone: false },
+  ],
+}
